@@ -12,7 +12,7 @@ This project demonstrates a **serverless data analytics pipeline** using AWS to 
 - **Amazon QuickSight** – creates interactive dashboards  
 - **AWS CloudFormation** – automates resource creation
 
-![Dashboard Screenshot](images/Sales_Data_Project_QS.pdf)
+![Dashboard Screenshot](images/Sales_Data_Project_QS.png)
 
 ---
 
@@ -76,16 +76,6 @@ Some of the findings include:
 - The top product categories were Kitchen and Food - Snacks, each contributing 19% of total revenue, respectively.
 - June 2022 showed the highest revenue for the year, followed by November 2022
 - The top 5 customers account for YY% of total sales
-
----
-
-## **Screenshot**
-
-Sales_data_project_QS
-![Yearly Revenue by Category] 
-![Monthly Revenue Trend]
-![Top 8 Products by Revenue] 
-![Percent of Yearly Revenue by Category]
 
 ---
 
