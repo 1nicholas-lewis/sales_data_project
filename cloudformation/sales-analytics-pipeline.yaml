@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS Sales Analytics Data Pipeline - S3, Glue, Athena
+
+Parameters:
+  GlueCrawlerRoleName:
+    Type: String
+    Description: "IAM Role name with permissions for Glue Crawler"
+
+  RawDataPrefix:
+    Type: String
+    Default: "raw-data/"
+    Description: "S3 folder for raw data"
+
+  ProcessedDataPrefix:
+    Type: String
+    Default: "processed-data/"
+    Description: "S3 folder for processed data"
+
+Resources:
+  SalesDataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'sales-analytics-${AWS::AccountId}-${AWS::Region}'
+  
+  GlueDatabase:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: business_analytics_db
+
+  GlueCrawler:
+    Type: AWS::Glue::Crawler
+    Properties:
+      Name: sales-data-crawler
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/${GlueCrawlerRoleName}'
+      DatabaseName: !Ref GlueDatabase
+      Targets:
+        S3Targets:
+          - Path: !Sub 's3://${SalesDataBucket}/${ProcessedDataPrefix}'
+      SchemaChangePolicy:
+        UpdateBehavior: UPDATE_IN_DATABASE
+        DeleteBehavior: DEPRECATE_IN_DATABASE
+
+Outputs:
+  S3BucketName:
+    Description: "Sales data S3 bucket"
+    Value: !Ref SalesDataBucket
+
+  GlueDatabaseName:
+    Description: "Glue Database Name"
+    Value: !Ref GlueDatabase
