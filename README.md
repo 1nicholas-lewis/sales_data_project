@@ -75,7 +75,6 @@ Some of the findings include:
 
 - The top product categories were Kitchen and Food - Snacks, each contributing 19% of total revenue, respectively.
 - June 2022 showed the highest revenue for the year, followed by November 2022
-- The top 5 customers account for YY% of total sales
 
 ---
 
